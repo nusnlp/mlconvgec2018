@@ -1,6 +1,6 @@
 # A Multilayer Convolutional Encoder-Decoder Neural Network for Grammatical Error Correction
 
-Code and model files for the paper: "A Multilayer Convolutional Encoder-Decoder Neural Network for Grammatical Error Correction" (In AAAI-18). If you use the code, models, or output files from this work please cite the paper:
+Code and model files for the paper: "A Multilayer Convolutional Encoder-Decoder Neural Network for Grammatical Error Correction" (In AAAI-18). If you use any part of this work, make sure you include the following citation:
 
 ```
 @InProceedings{chollampatt2018mlconv,
@@ -18,6 +18,7 @@ Code and model files for the paper: "A Multilayer Convolutional Encoder-Decoder 
     * [Fairseq-py](http://github.com/facebookresearch/fairseq-py)
     * [Subword-NMT](https://github.com/rsennrich/subword-nmt)
     * [N-best Reranker](https://github.com/nusnlp/nbest-reranker/)
+
   For training models, we suggest that you download the exact revisions of the above software. Go to `software/` directory and run `download.sh` directory to download the exact revisions of these software.
 3. Compile and install Fairseq-py.
 

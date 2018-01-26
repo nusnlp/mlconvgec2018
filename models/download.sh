@@ -1,5 +1,3 @@
-lm.trie
-
 mkdir -p mlconv mlconv_embed
 for model_name in  mlconv mlconv_embed ; do
     for i in {1..4}; do

@@ -53,7 +53,7 @@ elif [ $reranker_feats == "eolm" ]; then
     LM_PATH=$MODEL_DIR/lm/94Bcclm.trie
     if [ ! -f $LM_PATH ]; then
         mkdir -p $MODEL_DIR/lm
-        curl -L -o $MODEL_DIR/lm/94Bcclm.trie https://tinyurl.com/yb4jutxq/models/lm/94Bcclm.trie
+        curl -L -o $MODEL_DIR/lm/94Bcclm.trie https://tinyurl.com/yb4jutxq/lm/94Bcclm.trie
     fi
     featstring="EditOps(name='EditOps0'), LM('LM0', '$MODEL_DIR/lm/94Bcclm.trie', normalize=False), WordPenalty(name='WordPenalty0')"
 fi

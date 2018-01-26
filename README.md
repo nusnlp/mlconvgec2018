@@ -3,7 +3,7 @@
 Code and model files for the paper: "A Multilayer Convolutional Encoder-Decoder Neural Network for Grammatical Error Correction" (In AAAI-18). If you use the code, models, or output files from this work please cite the paper:
 
 ```
-@article{chollampatt2018mlconv,
+@InProceedings{chollampatt2018mlconv,
   author    = {Chollampatt, Shamil and Ng, Hwee Tou},
   title     = {A Multilayer Convolutional Encoder-Decoder Neural Network for Grammatical Error Correction},
   booktitle = {Proceedings of the Thirty-Second AAAI Conference on Artificial Intelligence},

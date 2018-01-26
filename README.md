@@ -59,8 +59,8 @@ In the `training/` directory, within the `preprocess.sh` script, place paths to 
 The code and models in this repository are licensed under the GNU General Public License Version 3.
 For commercial use of this code and models, separate commercial licensing is also available. Please contact:
 
-    Shamil Chollampatt (shamil@u.nus.edu)
-    Hwee Tou Ng (nght@comp.nus.edu.sg)
+* Shamil Chollampatt (shamil@u.nus.edu)
+* Hwee Tou Ng (nght@comp.nus.edu.sg)
 
 
 

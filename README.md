@@ -1,6 +1,6 @@
 # A Multilayer Convolutional Encoder-Decoder Neural Network for Grammatical Error Correction
 
-Code and model files for the paper: "A Multilayer Convolutional Encoder-Decoder Neural Network for Grammatical Error Correction" (In AAAI-18). If you use any part of this work, make sure you include the following citation:
+Code and model files for the [paper](https://arxiv.org/abs/1801.08831): "A Multilayer Convolutional Encoder-Decoder Neural Network for Grammatical Error Correction" (In AAAI-18). If you use any part of this work, make sure you include the following citation:
 
 ```
 @InProceedings{chollampatt2018mlconv,

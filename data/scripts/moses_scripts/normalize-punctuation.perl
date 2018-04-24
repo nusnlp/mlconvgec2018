@@ -75,7 +75,7 @@ while(<STDIN>) {
     }
     # German/Spanish/French "quotation", followed by comma, style
     else {
-	s/,\"/\",/g;	
+	s/,\"/\",/g;
 	s/(\.+)\"(\s*[^<])/\"$1$2/g; # don't fix period at end of sentence
     }
 

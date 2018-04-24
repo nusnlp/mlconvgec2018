@@ -17,7 +17,7 @@ Code and model files for the [paper](https://arxiv.org/abs/1801.08831): "A Multi
 2. Download the pre-requisite software:
     * [Fairseq-py](http://github.com/facebookresearch/fairseq-py)
     * [Subword-NMT](https://github.com/rsennrich/subword-nmt)
-    * [N-best Reranker](https://github.com/nusnlp/nbest-reranker/)
+    * [N-best Reranker](https://github.com/nusnlp/nbest-reranker/) (Requires [KenLM](https://github.com/kpu/kenlm) Python module)
 
   For training models, we suggest that you download the exact revisions of the above software. Go to `software/` directory and run `download.sh` directory to download the exact revisions of these software.
 3. Compile and install Fairseq-py.
@@ -26,7 +26,7 @@ Code and model files for the [paper](https://arxiv.org/abs/1801.08831): "A Multi
 ## For testing with pre-trained models
 1. Go to `data/` directory and run `prepare_test_data.sh` script to download and process CoNLL-2014 test dataset
 2. Go to `models/` directory and run `download.sh` to download the required model files
-3. For running the system, run the `run.sh` script with the following format 
+3. For running the system, run the `run.sh` script with the following format
 ```
 ./run.sh <input-file> <output-directory> <gpu-device-number> <models-path>
 ````
@@ -39,21 +39,31 @@ You can also run the script by adding optional arguments for re-ranking
 ./run.sh <input-file> <output-directory> <gpu-device-number> <models-path> <weights-file> <features>
 ````
  `<wegihts-file>`: path to trained feature weights for the re-ranker (within `models/reranker_weights`
- `<features>`: use 'eo' for edit operation features, and 'eolm' for both edit operations and language model features. 
+ `<features>`: use 'eo' for edit operation features, and 'eolm' for both edit operations and language model features.
 
 
 
 ## For training from scratch
+
+### Data Preparation
+To prepare the training and development data, in `data/` directory
+1. Update the paths to `NUCLE_TAR` and `LANG8V2` within `prepare_data.sh`
+2. Run the script `prepare_data.sh` from within `data/` directory.
+NOTE: To get the exact data you need to run the tokenization (Line #87 in `prepare_data.sh`) with NLTK v2.0b7. The number of sentences for the training data (`data/trian.tok.{src,trg}`) after preparing will be 2210277 sentence pairs (26557233 source tokens and 30028785 target tokens).
+
+### Training
 In the `training/` directory, within the `preprocess.sh` script, place paths to the the training datasets and development datasets. The source and target files must be tokenized.
 1. Go to `training/` directory
 2. Run `./preprocess.sh` script
-3. To train the models by initializing with pre-trained word embeddings, run `train_embed.sh`. To train the models without pre-trainined embeddings use the `train.sh` script instead.
+3a. To train the models without pre-trainined embeddings use the `train.sh` script.
+3b. To train the models with pre-trained word embeddings use the `train_embed.sh` script
+**NOTE**: The pre-trained embeddings are trained using Wikipedia data segmented using the released BPE model. If your training data and BPE model are different, we suggest that you pre-train [fastText](https://github.com/facebookresearch/fastText) embeddings on Wikipedia text segmented with your own BPE model and modify the paths within the script accordingly.
 4. To train the re-ranker, you would additionally need to have compiled [Moses](https://github.com/moses-smt/mosesdecoder) software. Run `train_reranker.sh` script with the following arguments:
 ```
 ./train_reranker.sh <output_dir> <gpu-device-number> <models-path> <path-to-moses>
 ```
 `<output-dir>`: directory to store temporary files and final output `weights.txt` file.
-
+5. Run the trained model from within `training/` directory using the script `run_trained_model.py`.
 
 ## License
 The code and models in this repository are licensed under the GNU General Public License Version 3.

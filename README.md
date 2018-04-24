@@ -49,15 +49,14 @@ You can also run the script by adding optional arguments for re-ranking
 To prepare the training and development data, in `data/` directory
 1. Update the paths to `NUCLE_TAR` and `LANG8V2` within `prepare_data.sh`
 2. Run the script `prepare_data.sh` from within `data/` directory.
-NOTE: To get the exact data you need to run the tokenization (Line #87 in `prepare_data.sh`) with NLTK v2.0b7. The number of sentences for the training data (`data/trian.tok.{src,trg}`) after preparing will be 2210277 sentence pairs (26557233 source tokens and 30028785 target tokens).
+   (**NOTE**: To get the exact data you may need to use NLTK v2.0b7 for tokenization. The prepared training data (`data/trian.tok.{src,trg}`) will have 2210277 sentence pairs with 26,557,233 source tokens and 30,028,785 target tokens).
 
 ### Training
 In the `training/` directory, within the `preprocess.sh` script, place paths to the the training datasets and development datasets. The source and target files must be tokenized.
 1. Go to `training/` directory
 2. Run `./preprocess.sh` script
-3a. To train the models without pre-trainined embeddings use the `train.sh` script.
-3b. To train the models with pre-trained word embeddings use the `train_embed.sh` script
-**NOTE**: The pre-trained embeddings are trained using Wikipedia data segmented using the released BPE model. If your training data and BPE model are different, we suggest that you pre-train [fastText](https://github.com/facebookresearch/fastText) embeddings on Wikipedia text segmented with your own BPE model and modify the paths within the script accordingly.
+3. a. To train the models without pre-trainined embeddings use the `train.sh` script.
+   b. To train the models with pre-trained word embeddings use the `train_embed.sh` script. (**NOTE**: The pre-trained embeddings are trained using Wikipedia data segmented using the released BPE model. If your training data and BPE model are different, we suggest that you pre-train [fastText](https://github.com/facebookresearch/fastText) embeddings on Wikipedia text segmented with your own BPE model and modify the paths within the script accordingly.)
 4. To train the re-ranker, you would additionally need to have compiled [Moses](https://github.com/moses-smt/mosesdecoder) software. Run `train_reranker.sh` script with the following arguments:
 ```
 ./train_reranker.sh <output_dir> <gpu-device-number> <models-path> <path-to-moses>

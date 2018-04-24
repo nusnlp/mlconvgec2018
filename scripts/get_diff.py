@@ -10,4 +10,4 @@ with open(prefix + '.' + src) as f_src, open(prefix + '.' + trg) as f_trg:
         sline = sline.strip()
         tline = tline.strip()
         if sline != tline:
-            print sline+'\t'+tline
+            print(sline+'\t'+tline)

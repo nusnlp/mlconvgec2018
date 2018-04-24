@@ -5,7 +5,7 @@ set -e
 set -x
 
 source ../paths.sh
-
+DATA_DIR=$PWD/
 # downloading test data files (CoNLL-2013 and CoNLL-2014)
 mkdir -p tmp
 wget http://www.comp.nus.edu.sg/~nlp/conll14st/conll14st-test-data.tar.gz -O tmp/conll14st.tar.gz

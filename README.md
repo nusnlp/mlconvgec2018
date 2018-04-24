@@ -58,10 +58,10 @@ In the `training/` directory, within the `preprocess.sh` script, place paths to 
 3. a. To train the models without pre-trainined embeddings use the `train.sh` script.
    b. To train the models with pre-trained word embeddings use the `train_embed.sh` script. (**NOTE**: The pre-trained embeddings are trained using Wikipedia data segmented using the released BPE model. If your training data and BPE model are different, we suggest that you pre-train [fastText](https://github.com/facebookresearch/fastText) embeddings on Wikipedia text segmented with your own BPE model and modify the paths within the script accordingly.)
 4. To train the re-ranker, you would additionally need to have compiled [Moses](https://github.com/moses-smt/mosesdecoder) software. Run `train_reranker.sh` script with the following arguments:
-```
-./train_reranker.sh <output_dir> <gpu-device-number> <models-path> <path-to-moses>
-```
-`<output-dir>`: directory to store temporary files and final output `weights.txt` file.
+      ```
+      ./train_reranker.sh <output_dir> <gpu-device-number> <models-path> <path-to-moses>
+      ```
+      `<output-dir>`: directory to store temporary files and final output `weights.txt` file.
 5. Run the trained model from within `training/` directory using the script `run_trained_model.py`.
 
 ## License

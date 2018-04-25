@@ -19,7 +19,6 @@ DATA_DIR=$PWD
 NUCLE_TAR=path/to/release3.2.tar.gz
 LANG8V2=path/to/lang-8-20111007-2.0/lang-8-20111007-L1-v2.dat
 
-#source $SOFTWARE_DIR/python-data/bin/activate #DELETE
 # path to scripts directories
 M2_SCRIPTS=$DATA_DIR/scripts/m2_scripts/
 MOSES_SCRIPTS=$DATA_DIR/scripts/moses_scripts/

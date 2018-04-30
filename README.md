@@ -49,7 +49,7 @@ You can also run the script by adding optional arguments for re-ranking
 To prepare the training and development data, in `data/` directory
 1. Update the paths to `NUCLE_TAR` and `LANG8V2` within `prepare_data.sh`
 2. Run the script `prepare_data.sh` from within `data/` directory.
-   (**NOTE**: To get the exact data you may need to use LangID.py v1.1.6 for language filtering and NLTK v2.0b7 for tokenization. The prepared training data (`data/train.tok.{src,trg}`) will have 2210277 sentence pairs with 26,557,233 source tokens and 30,028,785 target tokens).
+   (**NOTE**: To get the exact data you may need to use LangID.py v1.1.6 for language filtering and NLTK v2.0b7 for tokenization. The prepared training data (`data/train.tok.{src,trg}`) will have 2210277 sentence pairs with 26,557,233 source tokens and 30,028,798 target tokens).
 
 ### Training
 In the `training/` directory, within the `preprocess.sh` script, place paths to the the training datasets and development datasets. The source and target files must be tokenized.

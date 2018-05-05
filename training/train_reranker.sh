@@ -24,12 +24,12 @@ nbest=$beam
 threads=12
 
 ## setting model paths
-if [ -d $model_path ]; then
+if [[ -d "$model_path" ]]; then
     models=`ls $model_path/*.pt | tr '\n' ' ' | sed "s| \([^$]\)| --path \1|g"`
     echo $models
-elif [ -f $model_path ]; then
-    model=$model_path
-elif [ ! -e $model_path]; then
+elif [[ -f "$model_path" ]]; then
+    models=$model_path
+elif [[ ! -e "$model_path" ]]; then
     echo "Model path not found: $model_path"
 fi
 

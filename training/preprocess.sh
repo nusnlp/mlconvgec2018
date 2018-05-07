@@ -9,7 +9,7 @@ src_ext=src
 trg_ext=trg
 train_data_prefix=$DATA_DIR/train
 dev_data_prefix=$DATA_DIR/dev
-dev_data_m2=$DATA_DIR/dev.m2
+dev_data_m2=$DATA_DIR/dev.all.m2
 
 # path to subword nmt
 SUBWORD_NMT=$SOFTWARE_DIR/subword-nmt

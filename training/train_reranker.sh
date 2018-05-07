@@ -59,16 +59,18 @@ elif [ $reranker_feats == "eolm" ]; then
 fi
 
 
-CUDA_VISIBLE_DEVICES=$device python3.5 $FAIRSEQPY/generate.py --no-progress-bar --path $models --beam $beam --nbest $beam --interactive --workers $threads processed/bin < processed/dev.src > $output_dir/output.bpe.nbest.txt
+$SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < processed/dev.input.txt > $output_dir/dev.input.bpe.txt
+
+CUDA_VISIBLE_DEVICES=$device python3.5 $FAIRSEQPY/generate.py --no-progress-bar --path $models --beam $beam --nbest $beam --interactive --workers $threads processed/bin < $output_dir/dev.input.bpe.txt > $output_dir/dev.output.bpe.nbest.txt
 
 # reformating the nbest file
-$SCRIPTS_DIR/nbest_reformat.py -i $output_dir/output.bpe.nbest.txt --debpe > $output_dir/output.tok.nbest.reformat.txt
+$SCRIPTS_DIR/nbest_reformat.py -i $output_dir/dev.output.bpe.nbest.txt --debpe > $output_dir/dev.output.tok.nbest.reformat.txt
 
 # augmenting the dev nbest
-$NBEST_RERANKER/augmenter.py -s processed/dev.input.txt -i $output_dir/output.tok.nbest.reformat.txt -o $output_dir/output.tok.nbest.reformat.augmented.txt -f "$featstring"
+$NBEST_RERANKER/augmenter.py -s processed/dev.input.txt -i $output_dir/dev.output.tok.nbest.reformat.txt -o $output_dir/dev.output.tok.nbest.reformat.augmented.txt -f "$featstring"
 
 # training the nbest to obtain the weights
-$NBEST_RERANKER/train.py -i $output_dir/output.tok.nbest.reformat.augmented.txt -r processed/dev.m2 -c $TRAIN_DIR/rerank_config.ini --threads 12 --tuning-metric m2 --predictable-seed -o $TRAIN_DIR --moses-dir $moses_path --no-add-weight
+$NBEST_RERANKER/train.py -i $output_dir/dev.output.tok.nbest.reformat.augmented.txt -r processed/dev.m2 -c $TRAIN_DIR/rerank_config.ini --threads 12 --tuning-metric m2 --predictable-seed -o $TRAIN_DIR --moses-dir $moses_path --no-add-weight
 
 cp $TRAIN_DIR/weights.txt $output_dir/weights.txt
 

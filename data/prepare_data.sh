@@ -62,10 +62,10 @@ $M2_SCRIPTS/convert_m2_to_parallel.py   $DATA_DIR/nucle-dev/nucle-dev.m2 \
                                      $DATA_DIR/nucle-dev/nucle-dev.tok.src \
                                      $DATA_DIR/nucle-dev/nucle-dev.tok.trg
 # removing empty target sentence pairs
-paste $DATA_DIR/nucle-dev/nucle-dev.tok.src $DATA_DIR/nucle-dev/nucle-dev.tok.trg | awk -F $'\t' '$2!=""' > $DATA_DIR/nucle-dev/nucle-dev.tok.src-trg
-cut $DATA_DIR/nucle-dev/nucle-dev.tok.src-trg -f1 > $DATA_DIR/nucle-dev/nucle-dev.tok.src
-cut $DATA_DIR/nucle-dev/nucle-dev.tok.src-trg -f2 > $DATA_DIR/nucle-dev/nucle-dev.tok.trg
-rm $DATA_DIR/nucle-dev/nucle-dev.tok.src-trg
+paste $DATA_DIR/nucle-dev/nucle-dev.tok.src $DATA_DIR/nucle-dev/nucle-dev.tok.trg | awk -F $'\t' '$2!=""' > $DATA_DIR/nucle-dev/nucle-dev.non_empty.tok.src-trg
+cut $DATA_DIR/nucle-dev/nucle-dev.non_empty.tok.src-trg -f1 > $DATA_DIR/nucle-dev/nucle-dev.non_empty.tok.src
+cut $DATA_DIR/nucle-dev/nucle-dev.non_empty.tok.src-trg -f2 > $DATA_DIR/nucle-dev/nucle-dev.non_empty.tok.trg
+rm $DATA_DIR/nucle-dev/nucle-dev.non_empty.tok.src-trg
 
 # LANG-8 v2
 #############
@@ -96,7 +96,7 @@ $MOSES_SCRIPTS/clean-corpus-n.perl $DATA_DIR/concat-train/concat-train.tok src t
 
 ln -s concat-train/cleaned/concat-train.clean.tok.src train.tok.src
 ln -s concat-train/cleaned/concat-train.clean.tok.trg train.tok.trg
-ln -s nucle-dev/nucle-dev.tok.src dev.tok.src
-ln -s nucle-dev/nucle-dev.tok.trg dev.tok.trg
-ln -s nucle-dev/nucle-dev.m2 dev.m2
-
+ln -s nucle-dev/nucle-dev.non_empty.tok.src dev.tok.src
+ln -s nucle-dev/nucle-dev.non_empty.tok.trg dev.tok.trg
+ln -s nucle-dev/nucle-dev.tok.src dev.all.tok.src
+ln -s nucle-dev/nucle-dev.m2 dev.all.m2

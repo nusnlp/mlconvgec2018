@@ -19,7 +19,7 @@ Code and model files for the [paper](https://arxiv.org/abs/1801.08831): "A Multi
     * [Subword-NMT](https://github.com/rsennrich/subword-nmt)
     * [N-best Reranker](https://github.com/nusnlp/nbest-reranker/) (Requires [KenLM](https://github.com/kpu/kenlm) Python module)
 
-      For training and evaluation of the models, we suggest that you download the exact revisions of the above software. Go to `software/` directory and run `download.sh` directory to download the exact revisions of these software.
+      **NOTE**: For training and evaluation of the models, we suggest that you download the exact revisions of the above software. Go to `software/` directory and run `download.sh` directory to download the exact revisions of these software.
 3. Compile and install Fairseq-py.
 
 

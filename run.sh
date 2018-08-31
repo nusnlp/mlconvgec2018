@@ -20,7 +20,7 @@ else
     echo "Usage: `basename $0` <input_file> <output_dir> <gpu-device-num(e.g: 0)> <path to model_file/dir> [optional args: <path-to-reranker-weights> <featuers,e.g:eo,eolm]"   >&2
 fi
 if [[ -d "$model_path" ]]; then
-    models=`ls $model_path/*pt | tr '\n' ' ' | sed "s| \([^$]\)| --path \1|g"`
+    models=`ls $model_path/*pt | tr '\n' ' ' | sed "s| \([^$]\)|:\1|g"`
     echo $models
 elif [[ -f "$model_path" ]]; then
     models=$model_path

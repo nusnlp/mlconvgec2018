@@ -20,6 +20,11 @@ FAIRSEQPY=$SOFTWARE_DIR/fairseq-py
 # subword segmentation
 mkdir -p models/bpe_model
 bpe_operations=30000
+# check for subword nmt path
+if [ ! -d "$SUBWORD_NMT" ]; then
+  echo "Could not find $SUBWORD_NMT. PLease make sure it exists."
+  exit
+fi
 cat $train_data_prefix.tok.$trg_ext | $SUBWORD_NMT/learn_bpe.py -s $bpe_operations > models/bpe_model/train.bpe.model
 mkdir -p processed/
 $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $train_data_prefix.tok.$src_ext > processed/train.all.src
@@ -38,5 +43,5 @@ cut -f2  processed/train.annotated.src-trg > processed/train.trg
 
 #########################
 # preprocessing
-python3.5 $FAIRSEQPY/preprocess.py --source-lang src --target-lang trg --trainpref processed/train --validpref processed/dev --testpref  processed/dev --nwordssrc 30000 --nwordstgt 30000 --destdir processed/bin
+python3.6 $FAIRSEQPY/preprocess.py --source-lang src --target-lang trg --trainpref processed/train --validpref processed/dev --testpref  processed/dev --nwordssrc 30000 --nwordstgt 30000 --destdir processed/bin
 

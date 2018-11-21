@@ -38,7 +38,7 @@ You can also run the script by adding optional arguments for re-ranking
 ```
 ./run.sh <input-file> <output-directory> <gpu-device-number> <models-path> <weights-file> <features>
 ````
- `<wegihts-file>`: path to trained feature weights for the re-ranker (within `models/reranker_weights`
+ `<weights-file>`: path to trained feature weights for the re-ranker (within `models/reranker_weights`
  `<features>`: use 'eo' for edit operation features, and 'eolm' for both edit operations and language model features.
 
 

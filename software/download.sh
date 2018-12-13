@@ -13,8 +13,9 @@ rm $COMMIT.zip
 mv nbest-reranker-$COMMIT nbest-reranker
 #git clone https://github.com/nusnlp/nbest-reranker/
 
-echo "Downloading Subword NMT from https://github.com/rsennrich/subword-nmt (rev: ec5c7b009c409e72b5ef65a77c1a846546f14847)"
-wget https://github.com/rsennrich/subword-nmt/archive/ec5c7b009c409e72b5ef65a77c1a846546f14847.zip
-unzip ec5c7b009c409e72b5ef65a77c1a846546f14847.zip
-rm ec5c7b009c409e72b5ef65a77c1a846546f14847.zip
-mv subword-nmt-ec5c7b009c409e72b5ef65a77c1a846546f14847 subword-nmt
+COMMIT=ec5c7b009c409e72b5ef65a77c1a846546f14847
+echo "Downloading Subword NMT from https://github.com/rsennrich/subword-nmt (rev: $COMMIT)"
+wget https://github.com/rsennrich/subword-nmt/archive/$COMMIT.zip
+unzip $COMMIT.zip
+rm $COMMIT.zip
+mv subword-nmt-$COMMIT subword-nmt

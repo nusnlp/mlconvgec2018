@@ -1,5 +1,5 @@
-COMMIT=ceb2f1200c9e5b8bf42a1033e7638d3e8586609a
-echo "Downloading Fairseq from https://github.com/shamilcm/fairseq-py (rev:$COMMIT)"
+COMMIT=388c520be21752cacb9fe3b1712038f32e0e9a5f
+echo "Downloading Fairseq from https://github.com/pytorch/fairseq (rev:$COMMIT)"
 wget https://github.com/shamilcm/fairseq-py/archive/$COMMIT.zip
 unzip $COMMIT.zip
 rm $COMMIT.zip

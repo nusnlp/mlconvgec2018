@@ -42,23 +42,23 @@ tar -xvzf $NUCLE_TAR -C tmp/
 NUCLE_DIR=$DATA_DIR/tmp/release3.2
 mkdir -p $DATA_DIR/nucle-dev
 mkdir -p $DATA_DIR/nucle-train
-$M2_SCRIPTS/sort_m2.py  -i $NUCLE_DIR/data/conll14st-preprocessed.m2 \
+python2.7 $M2_SCRIPTS/sort_m2.py  -i $NUCLE_DIR/data/conll14st-preprocessed.m2 \
                      -o $DATA_DIR/tmp/nucle.sort.m2 \
                      -m 1 --output-remaining-lines
-$M2_SCRIPTS/get_num_lines.py    -i $DATA_DIR/tmp/nucle.sort.m2 \
+python2.7 $M2_SCRIPTS/get_num_lines.py    -i $DATA_DIR/tmp/nucle.sort.m2 \
                              --output_m2_prefix $DATA_DIR/tmp/nucle.split \
                              -n 4 \
                              --shuffle
 
 cat $DATA_DIR/tmp/nucle.split.1.m2 > $DATA_DIR/nucle-dev/nucle-dev.m2
 ( cat $DATA_DIR/tmp/nucle.split.[234].m2 ; cat $DATA_DIR/tmp/nucle.sort.m2.rem ) > $DATA_DIR/tmp/nucle.combined.m2
-$M2_SCRIPTS/get_num_lines.py -i $DATA_DIR/tmp/nucle.combined.m2 --output_m2_prefix $DATA_DIR/tmp/nucle-train -n 1 --shuffle
+python2.7 $M2_SCRIPTS/get_num_lines.py -i $DATA_DIR/tmp/nucle.combined.m2 --output_m2_prefix $DATA_DIR/tmp/nucle-train -n 1 --shuffle
 cat $DATA_DIR/tmp/nucle-train.1.m2 > $DATA_DIR/nucle-train/nucle-train.m2
 
-$M2_SCRIPTS/convert_m2_to_parallel.py   $DATA_DIR/nucle-train/nucle-train.m2 \
+python2.7 $M2_SCRIPTS/convert_m2_to_parallel.py   $DATA_DIR/nucle-train/nucle-train.m2 \
                                      $DATA_DIR/nucle-train/nucle-train.tok.src \
                                      $DATA_DIR/nucle-train/nucle-train.tok.trg
-$M2_SCRIPTS/convert_m2_to_parallel.py   $DATA_DIR/nucle-dev/nucle-dev.m2 \
+python2.7 $M2_SCRIPTS/convert_m2_to_parallel.py   $DATA_DIR/nucle-dev/nucle-dev.m2 \
                                      $DATA_DIR/nucle-dev/nucle-dev.tok.src \
                                      $DATA_DIR/nucle-dev/nucle-dev.tok.trg
 # removing empty target sentence pairs
@@ -75,15 +75,15 @@ L2=English 				 # Learning language, i.e. extract only English learners text
 
 mkdir -p $DATA_DIR/lang-8
 mkdir -p $DATA_DIR/tmp
-$LANG8_SCRIPTS/extract.py -i $LANG8V2 -o $DATA_DIR/tmp/ -l2 $L2
+python2.7 $LANG8_SCRIPTS/extract.py -i $LANG8V2 -o $DATA_DIR/tmp/ -l2 $L2
 cat $DATA_DIR/tmp/lang-8-20111007-L1-v2.dat.processed | perl -p -e 's@\[sline\].*?\[\\/sline\]@@sg' | sed 's/\[\\\/sline\]//g' | sed 's/\[\\\/f-[a-zA-Z]*\]//g' | sed 's/\[f-[a-zA-Z]*\]//g' | sed 's/rŠëyËb¢{//g' > $DATA_DIR/tmp/lang-8.$L2.cleanedup
 rm $DATA_DIR/tmp/lang-8-20111007-L1-v2.dat.processed
-$LANG8_SCRIPTS/langidfilter.py $DATA_DIR/tmp/lang-8.$L2.cleanedup > $DATA_DIR/tmp/lang-8.$L2.extracted
+python2.7 $LANG8_SCRIPTS/langidfilter.py $DATA_DIR/tmp/lang-8.$L2.cleanedup > $DATA_DIR/tmp/lang-8.$L2.extracted
 rm $DATA_DIR/tmp/lang-8.$L2.cleanedup
-$LANG8_SCRIPTS/get_parallel.py -i $DATA_DIR/tmp/lang-8.$L2.extracted -o lang-8 -d $DATA_DIR/tmp/lang-8/
+python2.7 $LANG8_SCRIPTS/get_parallel.py -i $DATA_DIR/tmp/lang-8.$L2.extracted -o lang-8 -d $DATA_DIR/tmp/lang-8/
 
 for EXT in src trg; do
-    cat $DATA_DIR/tmp/lang-8/lang-8.$EXT | $REPLACE_UNICODE | $REMOVE_NON_PRINT | sed  's/\\"/\"/g' | sed 's/\\t/ /g' | $NORMALIZE_PUNCT |  $TOKENIZER  > $DATA_DIR/lang-8/lang-8.tok.$EXT
+    cat $DATA_DIR/tmp/lang-8/lang-8.$EXT | $REPLACE_UNICODE | $REMOVE_NON_PRINT | sed  's/\\"/\"/g' | sed 's/\\t/ /g' | $NORMALIZE_PUNCT | python2.7  $TOKENIZER  > $DATA_DIR/lang-8/lang-8.tok.$EXT
 done
 
 # Preparing the concatenated training data.

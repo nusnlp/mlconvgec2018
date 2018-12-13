@@ -14,7 +14,7 @@ with open(args.input_file) as f:
     for line in f:
         line = line.strip()
         pieces = line.split('\t')
-        if pieces[0] == 'S':
+        if pieces[0] == 'O':
             scount += 1
         if pieces[0] == 'H':
             hyp = pieces[2]

@@ -25,18 +25,18 @@ if [ ! -d "$SUBWORD_NMT" ]; then
   echo "Could not find $SUBWORD_NMT. PLease make sure it exists."
   exit
 fi
-cat $train_data_prefix.tok.$trg_ext | $SUBWORD_NMT/learn_bpe.py -s $bpe_operations > models/bpe_model/train.bpe.model
+cat $train_data_prefix.tok.$trg_ext | python2.7 $SUBWORD_NMT/learn_bpe.py -s $bpe_operations > models/bpe_model/train.bpe.model
 mkdir -p processed/
-$SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $train_data_prefix.tok.$src_ext > processed/train.all.src
-$SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $train_data_prefix.tok.$trg_ext > processed/train.all.trg
-$SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $dev_data_prefix.tok.$src_ext > processed/dev.src
-$SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $dev_data_prefix.tok.$trg_ext > processed/dev.trg
+python2.7 $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $train_data_prefix.tok.$src_ext > processed/train.all.src
+python2.7 $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $train_data_prefix.tok.$trg_ext > processed/train.all.trg
+python2.7 $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $dev_data_prefix.tok.$src_ext > processed/dev.src
+python2.7 $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $dev_data_prefix.tok.$trg_ext > processed/dev.trg
 cp $dev_data_m2 processed/dev.m2
 cp $dev_data_prefix.all.tok.$src_ext processed/dev.input.txt
 
 ##########################
 #  getting annotated sentence pairs only
-python $SCRIPTS_DIR/get_diff.py  processed/train.all src trg > processed/train.annotated.src-trg
+python2.7 $SCRIPTS_DIR/get_diff.py  processed/train.all src trg > processed/train.annotated.src-trg
 cut -f1  processed/train.annotated.src-trg > processed/train.src
 cut -f2  processed/train.annotated.src-trg > processed/train.trg
 

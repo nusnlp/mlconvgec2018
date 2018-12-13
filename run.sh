@@ -18,6 +18,7 @@ if [ $# -ge 4 ]; then
 else
     echo "Please specify the paths to the input_file and output directory"
     echo "Usage: `basename $0` <input_file> <output_dir> <gpu-device-num(e.g: 0)> <path to model_file/dir> [optional args: <path-to-reranker-weights> <featuers,e.g:eo,eolm]"   >&2
+    exit 1
 fi
 if [[ -d "$model_path" ]]; then
     models=`ls $model_path/*pt | tr '\n' ' ' | sed "s| \([^$]\)|:\1|g"`

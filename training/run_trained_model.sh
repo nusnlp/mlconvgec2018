@@ -56,8 +56,8 @@ if [ $# -eq 6  ];  then
     elif [ $reranker_feats == "eolm" ]; then
         featstring="EditOps(name='EditOps0'), LM('LM0', '$MODEL_DIR/lm/94Bcclm.trie', normalize=False), WordPenalty(name='WordPenalty0')"
     fi
-    $SCRIPTS_DIR/nbest_reformat.py -i $output_dir/output.bpe.nbest.txt --debpe > $output_dir/output.tok.nbest.reformat.txt
-    $NBEST_RERANKER/augmenter.py -s $input_file -i $output_dir/output.tok.nbest.reformat.txt -o $output_dir/output.tok.nbest.reformat.augmented.txt -f "$featstring"
-    $NBEST_RERANKER/rerank.py -i $output_dir/output.tok.nbest.reformat.augmented.txt -w $reranker_weights -o $output_dir --clean-up
+    python2.7 $SCRIPTS_DIR/nbest_reformat.py -i $output_dir/output.bpe.nbest.txt --debpe > $output_dir/output.tok.nbest.reformat.txt
+    python2.7 $NBEST_RERANKER/augmenter.py -s $input_file -i $output_dir/output.tok.nbest.reformat.txt -o $output_dir/output.tok.nbest.reformat.augmented.txt -f "$featstring"
+    python2.7 $NBEST_RERANKER/rerank.py -i $output_dir/output.tok.nbest.reformat.augmented.txt -w $reranker_weights -o $output_dir --clean-up
     mv $output_dir/output.tok.nbest.reformat.augmented.txt.reranked.1best $output_dir/output.reranked.tok.txt
 fi
